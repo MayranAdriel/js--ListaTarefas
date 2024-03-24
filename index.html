@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="style.css" />
@@ -12,7 +12,16 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <title>Title</title>
+
+    <!--    Font Google-->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+    <title>Lista de Tarefas</title>
   </head>
   <body>
     <div class="container">
@@ -24,11 +33,17 @@
             >Coloque sua tarefa:
             <input id="taskInput" type="text" />
           </label>
-          <button onclick="pegandoValor()">Adicionar</button>
+          <button onclick="verificaDuplicidadeInputVazio()">Adicionar</button>
+          <div class="options">
+            <button onclick="imprimirLista(tarefasConcluidas)">
+              Concluidas
+            </button>
+            <button onclick="imprimirLista(tarefasNaoConcluidas)">
+              Pendentes
+            </button>
+          </div>
         </div>
-        <div id="listTasks">
-
-        </div>
+        <div id="listTasks"></div>
       </div>
     </div>
 
