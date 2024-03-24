@@ -2,8 +2,13 @@ let tarefasNaoConcluidas = [];
 let tarefasConcluidas = [];
 let divTarefas = document.querySelector("#listTasks");
 
-let estadoTarefa = "tarefaNaoConcluida";
-let tarefaFoiConcluida = false;
+// Variaveis que contém o estado da tarefa antes de ser impresso;
+let tarefa = {
+  estado : 'tarefaNaoConcluida',
+  foiConcluida : false,
+  pendencia : 'Concluir'
+}
+
 
 function verificaDuplicidadeInputVazio() {
   let valorInput = document.querySelector("#taskInput").value;
@@ -32,28 +37,37 @@ function deletarTarefa(indice, concluida) {
 
 function verificaQualTarefaEh (listaTarefa) {
   if (listaTarefa === tarefasConcluidas) {
-    estadoTarefa = 'tarefaConcluida';
-    tarefaFoiConcluida = true;
+    tarefa.estado = 'tarefaConcluida';
+    tarefa.foiConcluida = true;
+    tarefa.pendencia = 'Desfazer';
   } else {
-    estadoTarefa = 'tarefaNaoConcluida';
-    tarefaFoiConcluida = false;
+    tarefa.estado = 'tarefaNaoConcluida';
+    tarefa.foiConcluida = false;
+    tarefa.pendencia = 'Concluir';
   }
 }
 
-function concluirTarefa(indice) {
-  tarefasConcluidas.push(tarefasNaoConcluidas[indice]);
-  tarefasNaoConcluidas.splice(indice, 1);
+function concluirTarefa(indice, concluida) {
+  if (concluida) {
+    tarefasNaoConcluidas.push(tarefasConcluidas[indice]);
+    tarefasConcluidas.splice(indice, 1);
+    imprimirLista(tarefasConcluidas);
+  } else {
+    tarefasConcluidas.push(tarefasNaoConcluidas[indice]);
+    tarefasNaoConcluidas.splice(indice, 1);
     imprimirLista(tarefasNaoConcluidas);
+  }
+
 }
 
 function imprimirLista(lista = []) {
   divTarefas.innerHTML = '';
   verificaQualTarefaEh(lista);
   for (let i = 0; i < lista.length; i++) {
-    divTarefas.innerHTML += `<div class="${estadoTarefa}">
+    divTarefas.innerHTML += `<div class="${tarefa.estado}">
             <h3>${lista[i]}</h3>
-            <button onclick="concluirTarefa(${i})">Concluir</button>
-            <button onclick="deletarTarefa(${i}, ${tarefaFoiConcluida})">Deletar</button>
+            <button onclick="concluirTarefa(${i}, ${tarefa.foiConcluida})">${tarefa.pendencia}</button>
+            <button onclick="deletarTarefa(${i}, ${tarefa.foiConcluida})">Deletar</button>
           </div>`;
   }
 }
