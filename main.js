@@ -4,11 +4,10 @@ let divTarefas = document.querySelector("#listTasks");
 
 // Variaveis que contém o estado da tarefa antes de ser impresso;
 let tarefa = {
-  estado : 'tarefaNaoConcluida',
-  foiConcluida : false,
-  pendencia : 'Concluir'
-}
-
+  estado: "tarefaNaoConcluida",
+  foiConcluida: false,
+  pendencia: "✔️",
+};
 
 function verificaDuplicidadeInputVazio() {
   let valorInput = document.querySelector("#taskInput").value;
@@ -35,15 +34,15 @@ function deletarTarefa(indice, concluida) {
   }
 }
 
-function verificaQualTarefaEh (listaTarefa) {
+function verificaQualTarefaEh(listaTarefa) {
   if (listaTarefa === tarefasConcluidas) {
-    tarefa.estado = 'tarefaConcluida';
+    tarefa.estado = "tarefaConcluida";
     tarefa.foiConcluida = true;
-    tarefa.pendencia = 'Desfazer';
+    tarefa.pendencia = "❌";
   } else {
-    tarefa.estado = 'tarefaNaoConcluida';
+    tarefa.estado = "tarefaNaoConcluida";
     tarefa.foiConcluida = false;
-    tarefa.pendencia = 'Concluir';
+    tarefa.pendencia = "✔️";
   }
 }
 
@@ -57,17 +56,22 @@ function concluirTarefa(indice, concluida) {
     tarefasNaoConcluidas.splice(indice, 1);
     imprimirLista(tarefasNaoConcluidas);
   }
-
 }
 
 function imprimirLista(lista = []) {
-  divTarefas.innerHTML = '';
+  divTarefas.innerHTML = "";
   verificaQualTarefaEh(lista);
   for (let i = 0; i < lista.length; i++) {
     divTarefas.innerHTML += `<div class="${tarefa.estado}">
-            <h3>${lista[i]}</h3>
-            <button onclick="concluirTarefa(${i}, ${tarefa.foiConcluida})">${tarefa.pendencia}</button>
-            <button onclick="deletarTarefa(${i}, ${tarefa.foiConcluida})">Deletar</button>
-          </div>`;
+      <h3>${lista[i]}</h3>
+      <div class="buttonsPosition">
+        <button onclick="concluirTarefa(${i}, ${tarefa.foiConcluida})">
+          ${tarefa.pendencia}
+        </button>
+        <button onclick="deletarTarefa(${i}, ${tarefa.foiConcluida})">
+          🗑️
+        </button>
+      </div>
+    </div>`;
   }
 }
