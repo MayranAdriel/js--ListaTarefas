@@ -27,9 +27,11 @@ function verificaDuplicidadeInputVazio() {
 function deletarTarefa(indice, concluida) {
   if (concluida) {
     tarefasConcluidas.splice(indice, 1);
+    localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidas));
     imprimirLista(tarefasConcluidas);
   } else {
     tarefasNaoConcluidas.splice(indice, 1);
+    localStorage.setItem("tarefasNaoConcluidas", JSON.stringify(tarefasNaoConcluidas));
     imprimirLista(tarefasNaoConcluidas);
   }
 }
@@ -39,10 +41,12 @@ function verificaQualTarefaEh(listaTarefa) {
     tarefa.estado = "tarefaConcluida";
     tarefa.foiConcluida = true;
     tarefa.pendencia = "❌";
+    localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidas));
   } else {
     tarefa.estado = "tarefaNaoConcluida";
     tarefa.foiConcluida = false;
     tarefa.pendencia = "✔️";
+    localStorage.setItem("tarefasNaoConcluidas", JSON.stringify(tarefasNaoConcluidas));
   }
 }
 
@@ -60,7 +64,7 @@ function concluirTarefa(indice, concluida) {
 
 function imprimirLista(lista = []) {
   if(lista.length === 0){
-    divTarefas.innerHTML = "<h2>Nenhuma tarefa cadastrada...</h2>";
+    divTarefas.innerHTML = `<h3>Nenhuma tarefa encontrada...</h3>`;
   } else {
     verificaQualTarefaEh(lista);
     divTarefas.innerHTML = "";
@@ -79,3 +83,14 @@ function imprimirLista(lista = []) {
     }
   }
 }
+
+function procuraTarefasNoLocalStorage() {
+    if (localStorage.getItem("tarefasNaoConcluidas")) {
+        tarefasNaoConcluidas = JSON.parse(localStorage.getItem("tarefasNaoConcluidas"));
+    }
+    if (localStorage.getItem("tarefasConcluidas")) {
+        tarefasConcluidas = JSON.parse(localStorage.getItem("tarefasConcluidas"));
+    }
+}
+
+window.onload = procuraTarefasNoLocalStorage()
