@@ -42,7 +42,7 @@ function verificaQualTarefaEh(listaTarefa) {
     tarefa.foiConcluida = true;
     tarefa.pendencia = "❌";
     localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidas));
-  } else {
+  } else if(listaTarefa === tarefasNaoConcluidas) {
     tarefa.estado = "tarefaNaoConcluida";
     tarefa.foiConcluida = false;
     tarefa.pendencia = "✔️";
@@ -60,6 +60,8 @@ function concluirTarefa(indice, concluida) {
     tarefasNaoConcluidas.splice(indice, 1);
     imprimirLista(tarefasNaoConcluidas);
   }
+  localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidas));
+  localStorage.setItem("tarefasNaoConcluidas", JSON.stringify(tarefasNaoConcluidas));
 }
 
 function imprimirLista(lista = []) {
