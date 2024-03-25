@@ -59,10 +59,13 @@ function concluirTarefa(indice, concluida) {
 }
 
 function imprimirLista(lista = []) {
-  divTarefas.innerHTML = "";
-  verificaQualTarefaEh(lista);
-  for (let i = 0; i < lista.length; i++) {
-    divTarefas.innerHTML += `<div class="${tarefa.estado}">
+  if(lista.length === 0){
+    divTarefas.innerHTML = "<h2>Nenhuma tarefa cadastrada...</h2>";
+  } else {
+    verificaQualTarefaEh(lista);
+    divTarefas.innerHTML = "";
+    for (let i = 0; i < lista.length; i++) {
+      divTarefas.innerHTML += `<div class="${tarefa.estado}">
       <h3>${lista[i]}</h3>
       <div class="buttonsPosition">
         <button onclick="concluirTarefa(${i}, ${tarefa.foiConcluida})">
@@ -73,5 +76,6 @@ function imprimirLista(lista = []) {
         </button>
       </div>
     </div>`;
+    }
   }
 }

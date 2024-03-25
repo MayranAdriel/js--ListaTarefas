@@ -57,6 +57,16 @@ button {
     font-size: 1rem;
 }
 
+.options #conclude:focus {
+    background-color: green;
+    color: white;
+}
+
+.options #pending:focus {
+    background-color: red;
+    color: white;
+}
+
 #taskLabel {
     display: flex;
     flex-direction: column;

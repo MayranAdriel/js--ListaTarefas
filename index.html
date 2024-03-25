@@ -35,15 +35,17 @@
           </label>
           <button onclick="verificaDuplicidadeInputVazio()">Adicionar</button>
           <div class="options">
-            <button onclick="imprimirLista(tarefasConcluidas)">
+            <button id="conclude" onclick="imprimirLista(tarefasConcluidas)">
               Concluidas
             </button>
-            <button onclick="imprimirLista(tarefasNaoConcluidas)">
+            <button id="pending" onclick="imprimirLista(tarefasNaoConcluidas)">
               Pendentes
             </button>
           </div>
         </div>
-        <div id="listTasks"></div>
+        <div id="listTasks">
+          Vazio...
+        </div>
       </div>
     </div>
 
