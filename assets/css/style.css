@@ -106,6 +106,7 @@ button {
 
 .tarefaConcluida h3 {
     text-decoration: line-through;
+    text-align: right;
 }
 
 .tarefaConcluida button {
@@ -125,6 +126,10 @@ button {
     color: white;
 }
 
+.tarefaNaoConcluida h3 {
+    text-align: right;
+}
+
 .tarefaNaoConcluida button {
     background: transparent;
     border: transparent;
@@ -135,7 +140,15 @@ button {
 .buttonsPosition {
     position: absolute;
     display: flex;
-    flex-direction: column;
-    right: 2px;
+    left: 40px;
+    right: 1rem;
     bottom: 1rem;
+    top: 1rem;
+    gap: 3rem;
+}
+
+@media (width > 890px) {
+    .boxList {
+        width: 30%;
+    }
 }

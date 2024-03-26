@@ -22,7 +22,7 @@ function verificaDuplicidadeInputVazio() {
     tarefasNaoConcluidas.push(valorInput);
     imprimirLista(tarefasNaoConcluidas);
   }
-  let zeraInput = document.querySelector("#taskInput").value = "";
+  document.querySelector("#taskInput").value = ''
 }
 
 function deletarTarefa(indice, concluida) {
@@ -94,5 +94,12 @@ function procuraTarefasNoLocalStorage() {
     }
     imprimirLista(tarefasNaoConcluidas)
 }
+
+addEventListener('keyup', (event) => {
+    if (event.key === 'Enter') {
+        verificaDuplicidadeInputVazio();
+    }
+
+})
 
 window.onload = procuraTarefasNoLocalStorage();
