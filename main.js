@@ -22,6 +22,7 @@ function verificaDuplicidadeInputVazio() {
     tarefasNaoConcluidas.push(valorInput);
     imprimirLista(tarefasNaoConcluidas);
   }
+  let zeraInput = document.querySelector("#taskInput").value = "";
 }
 
 function deletarTarefa(indice, concluida) {
@@ -35,8 +36,7 @@ function deletarTarefa(indice, concluida) {
     imprimirLista(tarefasNaoConcluidas);
   }
 }
-
-function verificaQualTarefaEh(listaTarefa) {
+  function verificaQualTarefaEh(listaTarefa) {
   if (listaTarefa === tarefasConcluidas) {
     tarefa.estado = "tarefaConcluida";
     tarefa.foiConcluida = true;
@@ -49,8 +49,7 @@ function verificaQualTarefaEh(listaTarefa) {
     localStorage.setItem("tarefasNaoConcluidas", JSON.stringify(tarefasNaoConcluidas));
   }
 }
-
-function concluirTarefa(indice, concluida) {
+  function concluirTarefa(indice, concluida) {
   if (concluida) {
     tarefasNaoConcluidas.push(tarefasConcluidas[indice]);
     tarefasConcluidas.splice(indice, 1);
@@ -93,6 +92,7 @@ function procuraTarefasNoLocalStorage() {
     if (localStorage.getItem("tarefasConcluidas")) {
         tarefasConcluidas = JSON.parse(localStorage.getItem("tarefasConcluidas"));
     }
+    imprimirLista(tarefasNaoConcluidas)
 }
 
-window.onload = procuraTarefasNoLocalStorage()
+window.onload = procuraTarefasNoLocalStorage();
