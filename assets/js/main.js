@@ -22,34 +22,46 @@ function verificaDuplicidadeInputVazio() {
     tarefasNaoConcluidas.push(valorInput);
     imprimirLista(tarefasNaoConcluidas);
   }
-  document.querySelector("#taskInput").value = ''
+  document.querySelector("#taskInput").value = "";
 }
 
 function deletarTarefa(indice, concluida) {
   if (concluida) {
     tarefasConcluidas.splice(indice, 1);
-    localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidas));
+    localStorage.setItem(
+      "tarefasConcluidas",
+      JSON.stringify(tarefasConcluidas),
+    );
     imprimirLista(tarefasConcluidas);
   } else {
     tarefasNaoConcluidas.splice(indice, 1);
-    localStorage.setItem("tarefasNaoConcluidas", JSON.stringify(tarefasNaoConcluidas));
+    localStorage.setItem(
+      "tarefasNaoConcluidas",
+      JSON.stringify(tarefasNaoConcluidas),
+    );
     imprimirLista(tarefasNaoConcluidas);
   }
 }
-  function verificaQualTarefaEh(listaTarefa) {
+function verificaQualTarefaEh(listaTarefa) {
   if (listaTarefa === tarefasConcluidas) {
     tarefa.estado = "tarefaConcluida";
     tarefa.foiConcluida = true;
-    tarefa.pendencia = "❌";
-    localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidas));
-  } else if(listaTarefa === tarefasNaoConcluidas) {
+    tarefa.pendencia = "assets/imgs/x.png";
+    localStorage.setItem(
+      "tarefasConcluidas",
+      JSON.stringify(tarefasConcluidas),
+    );
+  } else if (listaTarefa === tarefasNaoConcluidas) {
     tarefa.estado = "tarefaNaoConcluida";
     tarefa.foiConcluida = false;
-    tarefa.pendencia = "✔️";
-    localStorage.setItem("tarefasNaoConcluidas", JSON.stringify(tarefasNaoConcluidas));
+    tarefa.pendencia = "assets/imgs/check.png";
+    localStorage.setItem(
+      "tarefasNaoConcluidas",
+      JSON.stringify(tarefasNaoConcluidas),
+    );
   }
 }
-  function concluirTarefa(indice, concluida) {
+function concluirTarefa(indice, concluida) {
   if (concluida) {
     tarefasNaoConcluidas.push(tarefasConcluidas[indice]);
     tarefasConcluidas.splice(indice, 1);
@@ -60,46 +72,49 @@ function deletarTarefa(indice, concluida) {
     imprimirLista(tarefasNaoConcluidas);
   }
   localStorage.setItem("tarefasConcluidas", JSON.stringify(tarefasConcluidas));
-  localStorage.setItem("tarefasNaoConcluidas", JSON.stringify(tarefasNaoConcluidas));
+  localStorage.setItem(
+    "tarefasNaoConcluidas",
+    JSON.stringify(tarefasNaoConcluidas),
+  );
 }
 
 function imprimirLista(lista = []) {
-  if(lista.length === 0){
+  if (lista.length === 0) {
     divTarefas.innerHTML = `<h3>Nenhuma tarefa encontrada...</h3>`;
   } else {
     verificaQualTarefaEh(lista);
     divTarefas.innerHTML = "";
     for (let i = 0; i < lista.length; i++) {
-      divTarefas.innerHTML += `<div class="${tarefa.estado}">
-      <h3>${lista[i]}</h3>
-      <div class="buttonsPosition">
-        <button onclick="concluirTarefa(${i}, ${tarefa.foiConcluida})">
-          ${tarefa.pendencia}
-        </button>
-        <button onclick="deletarTarefa(${i}, ${tarefa.foiConcluida})">
-          🗑️
-        </button>
+      divTarefas.innerHTML += `
+      <div class="${tarefa.estado}">
+      <div class="taskContent"><h3>${lista[i]}</h3></div>
+        <div class="buttonsPosition">
+          <img src="${tarefa.pendencia}" alt="Pendência" onclick="concluirTarefa(${i}, ${tarefa.foiConcluida})">
+          <img src="assets/imgs/lixeira.png" alt="Deletar" onclick="deletarTarefa(${i}, ${tarefa.foiConcluida})">
+        </div>
+       
       </div>
-    </div>`;
+    `;
     }
   }
 }
 
 function procuraTarefasNoLocalStorage() {
-    if (localStorage.getItem("tarefasNaoConcluidas")) {
-        tarefasNaoConcluidas = JSON.parse(localStorage.getItem("tarefasNaoConcluidas"));
-    }
-    if (localStorage.getItem("tarefasConcluidas")) {
-        tarefasConcluidas = JSON.parse(localStorage.getItem("tarefasConcluidas"));
-    }
-    imprimirLista(tarefasNaoConcluidas)
+  if (localStorage.getItem("tarefasNaoConcluidas")) {
+    tarefasNaoConcluidas = JSON.parse(
+      localStorage.getItem("tarefasNaoConcluidas"),
+    );
+  }
+  if (localStorage.getItem("tarefasConcluidas")) {
+    tarefasConcluidas = JSON.parse(localStorage.getItem("tarefasConcluidas"));
+  }
+  imprimirLista(tarefasNaoConcluidas);
 }
 
-addEventListener('keyup', (event) => {
-    if (event.key === 'Enter') {
-        verificaDuplicidadeInputVazio();
-    }
-
-})
+addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    verificaDuplicidadeInputVazio();
+  }
+});
 
 window.onload = procuraTarefasNoLocalStorage();
