@@ -20,7 +20,6 @@
   height: 100vh;
   width: 100vw;
   background-color: #202634;
-  padding: 1rem;
   color: white;
 }
 
@@ -165,6 +164,9 @@ button {
 @media (width > 890px) {
   .boxList {
     width: 30%;
+  }
+  .container {
+    padding: 1rem;
   }
 }
 
