@@ -88,7 +88,7 @@ function imprimirLista(lista = []) {
     for (let i = 0; i < lista.length; i++) {
       divTarefas.innerHTML += `
       <div class="${tarefa.estado}">
-      <div class="taskContent" ondblclick="atualizarTarefa(${i}, ${tarefa.foiConcluida})"><h3>${lista[i]}</h3></div>
+      <div class="taskContent" ondblclick="atualizarTarefa(${i})"><h3>${lista[i]}</h3></div>
         <div class="buttonsPosition">
           <img src="${tarefa.pendencia}" alt="Pendência" onclick="concluirTarefa(${i}, ${tarefa.foiConcluida})">
           <img src="assets/imgs/lixeira.png" alt="Deletar" onclick="deletarTarefa(${i}, ${tarefa.foiConcluida})">
@@ -118,19 +118,20 @@ divInput.addEventListener("keyup", (event) => {
   }
 });
 
-function atualizarTarefa(indice, concluida) {
+function atualizarTarefa(indice) {
   document.querySelector(".boxList").style.display = "none";
   document.querySelector(".taskUpdate").style.display = "block";
   let inputValue = document.querySelector("#taskInputUpdate");
   inputValue.addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
       if (inputValue.value) {
-        if (concluida) {
+        if (tarefa.estado === "tarefaConcluida") {
           tarefasConcluidas[indice] = inputValue.value;
           localStorage.setItem(
             "tarefasConcluidas",
             JSON.stringify(tarefasConcluidas),
           );
+          console.log("tarefa concluida");
           imprimirLista(tarefasConcluidas);
         } else {
           tarefasNaoConcluidas[indice] = inputValue.value;
@@ -138,6 +139,7 @@ function atualizarTarefa(indice, concluida) {
             "tarefasNaoConcluidas",
             JSON.stringify(tarefasNaoConcluidas),
           );
+          console.log("tarefa nao concluida");
           imprimirLista(tarefasNaoConcluidas);
         }
         document.querySelector("#taskInputUpdate").value = "";
@@ -148,4 +150,4 @@ function atualizarTarefa(indice, concluida) {
   });
 }
 
-window.onload = procuraTarefasNoLocalStorage();
+window.onload = procuraTarefasNoLocalStorage;
