@@ -22,7 +22,13 @@
         <div class="boxList-input">
           <label id="taskLabel"
             >Coloque sua tarefa:
-            <input id="taskInput" type="text" value="" required placeholder="Digite aqui..." />
+            <input
+              id="taskInput"
+              type="text"
+              value=""
+              required
+              placeholder="Digite aqui..."
+            />
           </label>
           <button onclick="verificaDuplicidadeInputVazio()">Adicionar</button>
           <div class="options">
@@ -34,13 +40,22 @@
             </button>
           </div>
         </div>
-        <div id="listTasks">
-          Clique em uma das opções.
-        </div>
+        <div id="listTasks">Clique em uma das opções.</div>
       </div>
+      <div class="taskUpdate" style="display: none">
+        <label id="taskLabelUpdate"
+        >Atualize sua tarefa:
+          <input
+                  id="taskInputUpdate"
+                  type="text"
+                  value=""
+                  required
+                  placeholder="Digite aqui..."
+          />
+        </label>
+      </div>
+      <footer>@mayran.adriel</footer>
     </div>
-    <footer>@mayran.adriel</footer>
-
 
 
     <script src="assets/js/main.js"></script>

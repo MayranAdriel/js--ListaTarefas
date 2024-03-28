@@ -8,16 +8,20 @@
   font-style: normal;
   font-variation-settings: "slnt" 0;
   text-transform: capitalize;
+  overflow: hidden;
 }
 
 .container {
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   height: 100vh;
+  width: 100vw;
   background-color: #202634;
   padding: 1rem;
+  color: white;
 }
 
 button {
@@ -38,6 +42,7 @@ button {
   border-radius: 5px;
   overflow: auto;
   background-color: white;
+  color: black;
 }
 
 #taskInput {
@@ -161,4 +166,35 @@ button {
   .boxList {
     width: 30%;
   }
+}
+
+.taskContent {
+  cursor: pointer;
+}
+
+.taskUpdate {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  top: 2rem;
+  bottom: 2rem;
+  margin: auto;
+  height: 40%;
+  width: 60%;
+}
+
+#taskLabelUpdate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 2rem;
+}
+
+#taskLabelUpdate input {
+    width: 90%;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding: 1rem;
 }

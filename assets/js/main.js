@@ -1,6 +1,7 @@
 let tarefasNaoConcluidas = [];
 let tarefasConcluidas = [];
 let divTarefas = document.querySelector("#listTasks");
+let divInput = document.querySelector("#taskInput");
 
 // Variaveis que contém o estado da tarefa antes de ser impresso;
 let tarefa = {
@@ -87,7 +88,7 @@ function imprimirLista(lista = []) {
     for (let i = 0; i < lista.length; i++) {
       divTarefas.innerHTML += `
       <div class="${tarefa.estado}">
-      <div class="taskContent"><h3>${lista[i]}</h3></div>
+      <div class="taskContent" ondblclick="atualizarTarefa(${i}, ${tarefa.foiConcluida})"><h3>${lista[i]}</h3></div>
         <div class="buttonsPosition">
           <img src="${tarefa.pendencia}" alt="Pendência" onclick="concluirTarefa(${i}, ${tarefa.foiConcluida})">
           <img src="assets/imgs/lixeira.png" alt="Deletar" onclick="deletarTarefa(${i}, ${tarefa.foiConcluida})">
@@ -111,10 +112,40 @@ function procuraTarefasNoLocalStorage() {
   imprimirLista(tarefasNaoConcluidas);
 }
 
-addEventListener("keyup", (event) => {
+divInput.addEventListener("keyup", (event) => {
   if (event.key === "Enter") {
     verificaDuplicidadeInputVazio();
   }
 });
+
+function atualizarTarefa(indice, concluida) {
+  document.querySelector(".boxList").style.display = "none";
+  document.querySelector(".taskUpdate").style.display = "block";
+  let inputValue = document.querySelector("#taskInputUpdate");
+  inputValue.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+      if (inputValue.value) {
+        if (concluida) {
+          tarefasConcluidas[indice] = inputValue.value;
+          localStorage.setItem(
+            "tarefasConcluidas",
+            JSON.stringify(tarefasConcluidas),
+          );
+          imprimirLista(tarefasConcluidas);
+        } else {
+          tarefasNaoConcluidas[indice] = inputValue.value;
+          localStorage.setItem(
+            "tarefasNaoConcluidas",
+            JSON.stringify(tarefasNaoConcluidas),
+          );
+          imprimirLista(tarefasNaoConcluidas);
+        }
+        document.querySelector("#taskInputUpdate").value = "";
+        document.querySelector(".boxList").style.display = "block";
+        document.querySelector(".taskUpdate").style.display = "none";
+      }
+    }
+  });
+}
 
 window.onload = procuraTarefasNoLocalStorage();
