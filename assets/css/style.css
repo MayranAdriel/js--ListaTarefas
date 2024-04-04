@@ -19,6 +19,8 @@
   align-items: center;
   background-color: #202634;
   color: white;
+  width: 100vw;
+  height: 100vh;
 }
 
 button {
@@ -176,13 +178,11 @@ button {
 
 .taskUpdate {
   position: absolute;
-  left: 1rem;
-  right: 1rem;
+  left: 2rem;
+  right: 2rem;
   top: 2rem;
   bottom: 2rem;
   margin: auto;
-  height: 40%;
-  width: 60%;
 }
 
 #taskLabelUpdate {
