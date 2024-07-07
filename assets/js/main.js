@@ -10,8 +10,18 @@ let tarefa = {
   pendencia: "✔️",
 };
 
-function verificaDuplicidadeInputVazio() {
-  let valorInput = document.querySelector("#taskInput").value;
+function inputPrincipal() {
+  let inputPrincipal = document.querySelector("#taskInput").value;
+  verificaDuplicidadeInputVazio(inputPrincipal);
+}
+
+divInput.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    verificaDuplicidadeInputVazio(document.querySelector("#taskInput").value);
+  }
+});
+
+function verificaDuplicidadeInputVazio(valorInput) {
   if (
     tarefasNaoConcluidas.includes(valorInput) ||
     tarefasConcluidas.includes(valorInput)
@@ -111,12 +121,6 @@ function procuraTarefasNoLocalStorage() {
   }
   imprimirLista(tarefasNaoConcluidas);
 }
-
-divInput.addEventListener("keyup", (event) => {
-  if (event.key === "Enter") {
-    verificaDuplicidadeInputVazio();
-  }
-});
 
 function atualizarTarefa(indice) {
   document.querySelector(".boxList").style.display = "none";
